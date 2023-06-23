@@ -6,7 +6,7 @@ server:
   port: 8080
 app:
   couchbase:
-    connection-string : couchbase://svc-data-couchbase
+    connection-string : couchbase://couchbase-master-service
     user-name : Admin
     password : test123
     primary-bucket : ProductTest
