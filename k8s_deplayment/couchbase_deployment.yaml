@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: data-couchbase
+    env: dev
+  name: data-couchbase-standalone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-couchbase
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: data-couchbase
+        env: dev
+    spec:
+      containers:
+      - image: couchbase:community-6.6.0
+        imagePullPolicy: IfNotPresent
+        name: data-couchbase
+        volumeMounts:
+          - mountPath: /opt/couchbase/var
+            name: data-volume
+      volumes:
+        - persistentVolumeClaim:
+            claimName: pvc-data-couchbase
+          name: data-volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: data-couchbase
+    env: dev
+  name: svc-data-couchbase
+spec:
+  ports:
+  - name: tcp-web-cb
+    port: 8091
+    protocol: TCP
+    targetPort: 8091
+  - name: tcp-memcached-cb
+    port: 11210
+    protocol: TCP
+    targetPort: 11210
+  selector:
+    app: data-couchbase
+    env: dev
+  type: LoadBalancer

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-api-service
+  labels:
+    app: customer-api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-api-service
+  template:
+    metadata:
+      labels:
+        app: customer-api-service
+    spec:
+      containers:
+      - name: customer-api-service
+        image: aniketphadatare/customer_api_service
+        ports:
+        - containerPort: 8090
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"    
+        - name: BPL_JVM_HEAD_ROOM
+          value: "2"  
+        - name: BPL_JVM_LOADED_CLASS_COUNT
+          value: "35"  
+        - name: BPL_JVM_THREAD_COUNT
+          value: "10"  
+        - name: JAVA_OPTS
+          value: >-
+                -XX:ReservedCodeCacheSize=40M
+                -XX:MaxMetaspaceSize=60M
+                -Xlog:gc
+                -Xms34m
+                -Xmx40m
+                -Xss256k
+                -XX:MaxRAM=150M
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-api-service
+spec:
+  type: NodePort
+  ports:
+  - name: "customer-service"
+    port: 8090
+    targetPort: 8090
+  type: LoadBalancer
+  selector:
+    app: customer-api-service

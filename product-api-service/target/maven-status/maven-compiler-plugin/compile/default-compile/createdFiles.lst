@@ -1,0 +1,5 @@
+com/example/productapiservice/controller/ProductController.class
+com/example/productapiservice/ProductApiServiceApplication.class
+com/example/productapiservice/service/ProductService.class
+com/example/productapiservice/service/ProductServiceImpl.class
+com/example/productapiservice/model/Product.class
