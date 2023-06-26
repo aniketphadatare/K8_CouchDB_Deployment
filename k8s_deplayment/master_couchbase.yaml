@@ -28,7 +28,10 @@ metadata:
     app: couchbase-master-service  
 spec:   
   ports:  
-    - port: 8091  
+    - port: 8091 
+      name : nonsecure
+    - port : 11210
+      name : secure
   selector:   
     app: couchbase-master-pod  
   type: LoadBalancer
