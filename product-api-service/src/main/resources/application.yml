@@ -7,7 +7,7 @@ server:
 app:
   couchbase:
     connection-string : couchbase://couchbase-master-service
-    user-name : Admin
-    password : test123
-    primary-bucket : ProductTest
+    user-name : Administrator
+    password : password
+    primary-bucket : travel-sample
 
