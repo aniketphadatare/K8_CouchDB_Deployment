@@ -9,5 +9,5 @@ app:
     connection-string : couchbase://10.106.138.141:30636
     user-name : Administrator
     password : password
-    primary-bucket : travel-sample
+    primary-bucket : product-data
 
