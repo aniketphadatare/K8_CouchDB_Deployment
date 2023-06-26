@@ -32,3 +32,5 @@ spec:
   selector:   
     app: couchbase-master-pod  
   type: LoadBalancer
+  externalIPs:
+    - 10.106.138.141
